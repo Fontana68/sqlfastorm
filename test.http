@@ -1,0 +1,141 @@
+GET http://localhost:8080/api/inspection/current
+
+###
+
+POST http://localhost:8080/api/inspection/current/measurement/opacity-smoke/live
+content-type: application/json
+
+{
+    "location": "Sofia Test Str 16",
+    "manufacturer": "Test Company LTD",
+    "model": "Test model",
+    "serialNumber": "123456",
+    "softwareVersion": "1.0",
+    "deviceRemark": "remark",
+    "opacitySmokeResult": 1.2,
+    "rpmResult": 1892,
+    "engineOilTemperature" : 78.4
+}
+
+###
+
+POST http://localhost:8080/api/inspection/current/measurement/opacity-smoke
+content-type: application/json
+
+{
+    "location": "Sofia Test Str 16",
+    "conductedDatetime": "2020-04-23T18:25:43",
+    "manufacturer": "Test Company LTD",
+    "model": "Test model",
+    "serialNumber": "123456",
+    "softwareVersion": "1.0",
+    "deviceRemark": "remark",
+    "regNum": "BL123AJ" ,
+    "measurements" : [
+        {
+            "opacitySmokeResult": 1.21,
+            "rpmResult": 1892,
+            "engineOilTemperature" : 78.4
+        },
+        {
+            "opacitySmokeResult": 2.56,
+            "rpmResult": 2100,
+            "engineOilTemperature" : 81.4
+        }
+    ]
+}
+
+###
+
+POST http://localhost:8080/api/inspection/current/measurement/gas-emissions/live
+content-type: application/json
+
+{
+    "location": "Sofia Test Str 16",
+    "manufacturer": "Test Company LTD",
+    "model": "Test model",
+    "serialNumber": "123456",
+    "softwareVersion": "1.0",
+    "deviceRemark": "remark",
+    "rpmResult": 1200,
+    "engineOilTemperature" : 78.4,
+    "coPercent": 0.34,
+    "co2Percent" : 7.4,
+    "o2Percent" : 2.2,
+    "hc": 30
+}
+
+###
+
+POST http://localhost:8080/api/inspection/current/measurement/gas-emissions
+content-type: application/json
+
+{
+    "location": "Sofia Test Str 16",
+    "conductedDatetime": "2020-04-23T18:25:43",
+    "manufacturer": "Test Company LTD",
+    "model": "Test model",
+    "serialNumber": "123456",
+    "softwareVersion": "1.0",
+    "deviceRemark": "remark",
+    "regNum": "BL123AJ",
+    "measurements" : [
+        {
+            "rpmResult": 1200,
+            "engineOilTemperature" : 78.4,
+            "coPercent": 0.34,
+            "co2Percent" : 7.4,
+            "o2Percent" : 2.2,
+            "hc": 30,
+            "airRatioLambda" : 0.987,
+            "fuelType" : 3
+        },
+        {
+            "rpmResult": 2100,
+            "engineOilTemperature" : 78.4,
+            "coPercent": 0.36,
+            "co2Percent" : 7.5,
+            "o2Percent" : 2.3,
+            "hc": 31,
+            "airRatioLambda" : 1.087,
+            "fuelType" : 1
+        }
+    ]
+}
+
+
+###
+
+POST http://localhost:8080/api/inspection/current/live
+content-type: application/json
+
+{
+    "oilTemp": 123,
+    "rpm" : 1300
+}
+
+###
+
+POST http://127.0.0.1:8080/user/createuser
+content-type: application/json
+
+{
+    "username" : "Leonardo",
+    "userid" : 3,
+    "designation" : "scelta",
+    "pay" : 3.576
+}
+
+###
+POST http://127.0.0.1:8080/user/createuser2
+Content-Type: application/x-www-form-urlencoded
+
+username=Leonardo
+&password=12345678
+
+###
+POST http://127.0.0.1:8080/files/uploadfile
+Content-Type: multipart/form-data
+
+Content-Disposition: form-data; name="file"; filename="RSALog14102020.txt"
+Content-Type: text/plain
