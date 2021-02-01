@@ -28,7 +28,8 @@ app.include_router(accordion.router)
 
 @app.get("/")
 def main():
-    return RedirectResponse(url = "/api/inspection/current/")
+    #return RedirectResponse(url = "/api/inspection/current/")
+    return {"hello" : "world"}
 
 
 '''
