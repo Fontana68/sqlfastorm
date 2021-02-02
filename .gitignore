@@ -1,0 +1,7 @@
+
+# locali
+.mypy_cache/
+.vscode/
+app/__pycache__/
+leo/
+TestUfficialeGAS.csv

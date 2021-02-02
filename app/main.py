@@ -10,6 +10,10 @@ from starlette.responses import RedirectResponse
 
 from typing import Optional, List
 from pydantic import BaseModel, Field
+from datetime import timezone
+
+from .mysend import mandaviaposta
+
 
 app = FastAPI(debug = True)
 
@@ -199,7 +203,9 @@ class MisuraLiveGAS(BaseModel):
 @app.post("/api/inspection/current/measurement/gas-emissions/live")
 async def create_prova4(prova: MisuraLiveGAS):
     elemtimestamp = prova.dict() # Misura do dict
-    now = datetime.now() # current date and time
+    # now = datetime.now() # current date and time
+    now = datetime.now(tz=timezone.utc)
+    
     mio = "{:03d}".format(int(now.microsecond / 1000.0) )
     elemtimestamp["timestamp"] = now.strftime("%H:%M:%S.") + mio
 
@@ -222,7 +228,9 @@ class MisuraLiveOPA(BaseModel):
 @app.post("/api/inspection/current/measurement/opacity-smoke/live")
 async def create_prova2(prova: MisuraLiveOPA):
     elemtimestamp = prova.dict() # Misura do dict
-    now = datetime.now() # current date and time
+    # now = datetime.now() # current date and time
+    now = datetime.now(tz=timezone.utc)
+    
     mio = "{:03d}".format(int(now.microsecond / 1000.0) )
     elemtimestamp["timestamp"] = now.strftime("%H:%M:%S.") + mio
 
@@ -238,7 +246,8 @@ class MisuraLiveOBD(BaseModel):
 @app.post("/api/inspection/current/live")
 async def create_prova5(prova: MisuraLiveOBD):
     elemtimestamp = prova.dict() # Misura do dict
-    now = datetime.now() # current date and time
+    # now = datetime.now() # current date and time
+    now = datetime.now(tz=timezone.utc)
     mio = "{:03d}".format(int(now.microsecond / 1000.0) )
     elemtimestamp["timestamp"] = now.strftime("%H:%M:%S.") + mio
 
@@ -302,6 +311,8 @@ async def create_prova3(prova: ProvaGAS):
     for elem in prova.measurements:
         print(elem.dict())
 
+    mandaviaposta()
+
     return prova
 
 
@@ -348,6 +359,8 @@ async def create_prova(prova: ProvaOPA):
 
     for elem in prova.measurements:
         print(elem.dict())
+
+    mandaviaposta()
 
     return prova
 
@@ -401,4 +414,19 @@ async def upload_file(file: UploadFile = File(...)):
     return {"message": " Valid file uploaded", "filetype": file.content_type}
 
 # Uploading a pdf file 
-# API : http://localhost:8000/files/uploadfile    
+# API : http://localhost:8000/files/uploadfile  
+'''
+import requests
+# from requests import post
+
+with open('test.http', 'rb') as f:
+    r = requests.post('http://tempdownload.brainbee.com/Omnibus800/', files={'test.http': f})  
+    print(r.text) 
+
+from datetime import timezone
+
+dt_now = datetime.now(tz=timezone.utc)
+print(dt_now)
+dt_ts = datetime.fromtimestamp(1571595618.0, tz=timezone.utc)       
+print(dt_ts)
+'''
