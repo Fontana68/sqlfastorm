@@ -2,6 +2,16 @@ GET http://localhost:8080/api/inspection/current
 
 ###
 
+GET https://pregledi.demax.bg:8443/api/inspection/current
+Accept: application/json
+
+###
+
+GET https://pregledi.demax.bg:8443/api/inspection/current
+Authorization: Basic dGVjaGluc3BEZXZlbG9wZXI6elZyV3prUEFIVkJRejgzS1RlUXJ1QnJWSHlIeFNu
+Accept: application/json
+###
+
 POST http://localhost:8080/api/inspection/current/measurement/opacity-smoke/live
 content-type: application/json
 
